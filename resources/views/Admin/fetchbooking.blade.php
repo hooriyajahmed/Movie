@@ -1,101 +1,119 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Booked Tickets</title>
+@extends('Admin.sidebar')
 
-    <style>
-        body{
-            margin:0;
-            min-height:100vh;
-            background:linear-gradient(135deg,#1b1b2f,#0f0f1f);
-            padding:40px;
-            font-family:Arial, Helvetica, sans-serif;
-            text-shadow:0 0 20px #ff4c60;
-            color:#fff;
-        }
+@section('admin')
 
-        h2{
-            text-align:center;
-            color:#ff4c60;
-            margin-bottom:30px;
-            text-transform:uppercase;
-            font-weight:700;
-        }
+<style>
+    body{
+        background:linear-gradient(135deg,#1b1b2f,#0f0f1f);
+        font-family:Arial, Helvetica, sans-serif;
+        color:#fff;
+    }
 
-        .table-box{
-            background:#111;
-            border:1px solid #222;
-            border-radius:12px;
-            padding:20px;
-            box-shadow:0 0 30px rgba(255,76,96,.3);
-        }
+    h2{
+        text-align:center;
+        color:#ff4c60;
+        margin-bottom:30px;
+        text-transform:uppercase;
+        font-weight:700;
+        text-shadow:0 0 20px #ff4c60;
+    }
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+    .table-box{
+        background:#111;
+        border:1px solid #222;
+        border-radius:12px;
+        padding:20px;
+        box-shadow:0 0 30px rgba(255,76,96,.3);
+    }
 
-        th,td{
-            padding:12px;
-            text-align:center;
-            border-bottom:1px solid #222;
-        }
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
 
-        th{
-            background:#ff4c60;
-            color:#fff;
-            text-transform:uppercase;
-            font-size:14px;
-        }
+    th,td{
+        padding:12px;
+        text-align:center;
+        border-bottom:1px solid #222;
+    }
 
-        td{
-            color:#ddd;
-            font-size:14px;
-        }
+    th{
+        background:#ff4c60;
+        color:#fff;
+        text-transform:uppercase;
+        font-size:14px;
+    }
 
-        tr:hover{
-            background:#1a1a1a;
-        }
-    </style>
-</head>
-<body>
+    td{
+        color:#ddd;
+        font-size:14px;
+    }
 
-<h2>🎟 Booked Tickets</h2>
+    tr:hover{
+        background:#1a1a1a;
+    }
+</style>
 
-<div class="table-box">
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Movie</th>
-            <th>Show Time</th>
-            <th>Seat Class</th>
-            <th>Seats</th>
-            <th>Price</th>
-            <th>Date</th>
-        </tr>
+<div class="container-fluid px-4">
 
-        @foreach($bookings as $booking)
-        <tr>
-            <td>{{ $booking->id }}</td>
-            <td>{{ $booking->movie_name }}</td>
-            <td>{{ $booking->show_time }}</td>
-            <td>{{ $booking->seat_class }}</td>
-            <td>{{ $booking->seats }}</td>
-            <td>
+    <h2 class="mt-3">🎟 Booked Tickets</h2>
+
+    <div class="table-box table-responsive">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Movie</th>
+                    <th>Show Time</th>
+                    <th>Seat Class</th>
+                    <th>Seats</th>
+                    <th>Total Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @forelse($bookings as $booking)
+
                 @php
-                    $price_per_seat = 0;
-                    if($booking->seat_class == 'Gold') $price_per_seat = 500;
-                    elseif($booking->seat_class == 'Platinum') $price_per_seat = 800;
-                    elseif($booking->seat_class == 'Box') $price_per_seat = 1200;
+                    $price = match($booking->seat_class){
+                        'Gold' => 500,
+                        'Platinum' => 800,
+                        'Box' => 1200,
+                        default => 0
+                    };
+                    $total = $price * $booking->seats;
                 @endphp
-                {{ $price_per_seat * $booking->seats }}
-            </td>
-            <td>{{ $booking->booking_date }}</td>
-        </tr>
-        @endforeach
 
-    </table>
+                <tr>
+                    <td>{{ $booking->id }}</td>
+                    <td>{{ $booking->user->name ?? $booking->user->email ?? 'N/A' }}</td>
+                    <td>{{ $booking->movie->name ?? 'N/A' }}</td>
+                    <td>{{ $booking->show_time }}</td>
+                    <td>{{ $booking->seat_class }}</td>
+                    <td>{{ $booking->seats }}</td>
+                    <td>Rs {{ number_format($total) }}</td>
+                    <td>{{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}</td>
+                </tr>
+
+            @empty
+                <tr>
+                    <td colspan="8" style="color:#aaa;">
+                        No bookings found
+                    </td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="mt-3 d-flex justify-content-center">
+            {{ $bookings->links() }}
+        </div>
+
+    </div>
 </div>
 
-</body>
-</html>
+@endsection

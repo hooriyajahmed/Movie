@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        
         body{
             margin:0;
             min-height:100vh;
@@ -15,9 +16,8 @@
             align-items:center;
             justify-content:center;
             font-family:Arial, Helvetica, sans-serif;
-            color-scheme: dark; /* ⭐ calendar dark mode */
+            color-scheme: dark;
         }
-
         .booking-card{
             background:#111;
             border:1px solid #222;
@@ -26,32 +26,20 @@
             width:500px;
             box-shadow:0 0 30px rgba(255,76,96,.3);
         }
-
         .card-header{
             background:none;
             border:none;
             text-align:center;
             margin-bottom:25px;
         }
-
         .card-header h2{
             color:#ff4c60;
             font-weight:700;
             text-transform:uppercase;
             text-shadow:0 0 12px rgba(255,76,96,.9);
         }
-
-        .card-header p{
-            color:#aaa;
-            font-size:14px;
-        }
-
-        label{
-            color:#ccc;
-            font-size:14px;
-            margin-bottom:6px;
-        }
-
+        .card-header p{ color:#aaa; font-size:14px; }
+        label{ color:#ccc; font-size:14px; margin-bottom:6px; }
         input,select{
             background:#000;
             border:1px solid #ff4c60;
@@ -59,31 +47,13 @@
             border-radius:8px;
             padding:12px;
             margin-bottom:16px;
-            accent-color:#ff4c60; /* ⭐ calendar highlight pink */
+            accent-color:#ff4c60;
         }
-
-        input::placeholder{
-            color:#777;
-        }
-
         input:focus,select:focus{
             outline:none;
             border-color:#ff2f92;
-            background:#000;
             box-shadow:0 0 10px rgba(255,76,96,.4);
-            color:#fff;
         }
-
-        
-        input[type="date"]::-webkit-calendar-picker-indicator{
-            filter: invert(1) sepia(1) saturate(5) hue-rotate(315deg);
-            cursor:pointer;
-        }
-
-        .row{
-            gap:15px;
-        }
-
         button{
             width:100%;
             background:#ff4c60;
@@ -95,32 +65,13 @@
             box-shadow:0 0 20px rgba(255,76,96,.9);
             transition:.3s;
         }
-
         button:hover{
             background:#ff2f92;
             transform:translateY(-2px);
         }
-
-    
-        .success-message{
-            background:#1a0f14;
-            border:1px solid #ff4c60;
-            color:#ff4c60;
-            padding:14px;
-            border-radius:12px;
-            text-align:center;
-            margin-bottom:20px;
-            font-size:15px;
-            font-weight:700;
-            box-shadow:0 0 25px rgba(255,76,96,.9);
-            text-shadow:0 0 10px rgba(255,76,96,.9);
-        }
-
-        .text-danger{
-            font-size:13px;
-        }
     </style>
 </head>
+
 <body>
 
 <div class="booking-card">
@@ -136,11 +87,18 @@
         </div>
     @endif
 
-    <form method="POST" action="/booking">
+    
+    <form method="POST" action="{{ route('booking.store') }}">
         @csrf
 
+        
         <label>Movie Name</label>
-        <input type="text" name="movie_name" placeholder="John Wick 5" required>
+<input type="text"
+       value="{{ $movie->name }}"
+       readonly>
+
+<input type="hidden" name="movie_id" value="{{ $movie->id }}">
+
 
         <div class="row">
             <div class="col">

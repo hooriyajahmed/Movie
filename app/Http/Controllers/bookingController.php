@@ -4,36 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Movie;
 
 class BookingController extends Controller
 {
-    
-    public function userbooking()
+    // ✅ BOOKING FORM OPEN (GET /booking/{id})
+    public function userbooking($id)
     {
-        return view('Admin.booking');
+        $movie = Movie::findOrFail($id);
+        return view('Admin.booking', compact('movie'));
     }
 
-    
+    // ✅ BOOKING SAVE (POST /booking)
     public function store(Request $req)
     {
         $data = $req->validate([
-            "movie_name"   => "required",
+            "movie_id"     => "required|exists:movies,id",
             "show_time"    => "required",
             "seat_class"   => "required",
             "seats"        => "required|integer|min:1",
             "booking_date" => "required|date"
         ]);
 
-        Booking::create($data);
+        // ✅ Movie fetch
+        $movie = Movie::findOrFail($req->movie_id);
 
-        return back()->with('success','Booking Confirmed Successfully');
+        // ✅ Seats availability check (important)
+        if ($movie->seats < $req->seats) {
+            return back()->with('error', 'Not enough seats available');
+        }
 
+        // ✅ Seats minus
+        $movie->seats = $movie->seats - $req->seats;
+        $movie->save();
+
+        // ✅ Booking create with user_id
+        Booking::create([
+            'movie_id'     => $req->movie_id,
+            'user_id'      => auth()->id(), // 👈 USER ID
+            'show_time'    => $req->show_time,
+            'seat_class'   => $req->seat_class,
+            'seats'        => $req->seats,
+            'booking_date' => $req->booking_date,
+        ]);
+
+        return back()->with('success', 'Booking Confirmed Successfully');
     }
 
-    
+    // ✅ FETCH BOOKINGS (ADMIN)
     public function fetchbooking()
     {
-        $bookings = Booking::orderBy('created_at','desc')->get();
-        return view('booking.index', compact('bookings'));
+        $bookings = Booking::with(['movie', 'user'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('Admin.fetchbooking', compact('bookings'));
     }
 }

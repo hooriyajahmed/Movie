@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\bookingController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\movieController;
 use App\Http\Controllers\trailerController;
@@ -55,12 +55,18 @@ Route::get('Admin/deletemovie/{id}', [movieController::class, 'delete'])->name('
 Route::get('Admin/editmovie/{id}', [movieController::class, 'edit'])->name('editmovie')->middleware(validrole::class);
 // Update movie
 Route::post('Admin/updatemovie/{id}', [movieController::class, 'update'])->name('updatemovie')->middleware(validrole::class);
-// booking
-Route::get('/booking', [bookingController::class, 'userbooking'])->name('/booking');
 
-Route::post('/booking', [bookingController::class, 'store'])->name('/booking');
+// booking form open
+Route::get('/booking/{id}', [BookingController::class, 'userbooking'])
+    ->name('booking.form');
 
-Route::get('/bookings', [bookingController::class, 'fetchbooking'])->name('/bookings');
+// booking save
+Route::post('/booking', [BookingController::class, 'store'])
+    ->name('booking.store');
+
+// all bookings
+Route::get('/bookings', [BookingController::class, 'fetchbooking'])
+    ->name('fetchbookings');
 
 //Trailer
 Route::get('/addtrailer', [trailerController::class, 'index'])->name('addtrailer')->middleware(validrole::class);
@@ -76,7 +82,7 @@ Route::get('/edit-trailer/{id}', [trailerController::class, 'edit'])->name('trai
 Route::post('/update-trailer/{id}', [trailerController::class, 'update'])->name('trailer.update')->middleware(validrole::class);
 
 //user cate
-Route::get('/user>category',[userController::class,'fatchcategory'])->name('fatchcategory');
+Route::get('/user>category', [userController::class, 'fatchcategory'])->name('fatchcategory');
 
 // user movie
-Route::get('/user>movie/{id}',[userController::class,'moviecategory'])->name('moviecategory');
+Route::get('/user>movie/{id}', [userController::class, 'moviecategory'])->name('moviecategory');

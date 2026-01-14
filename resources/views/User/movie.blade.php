@@ -84,7 +84,7 @@
                         <h5>{{ $movie->name }}</h5>
                         <p>{{($movie->desc) }}</p>
 
-                        <a href="#" class="dark-btn">Book Now</a>
+                        <a href="{{route('booking.form',$movie->id)}}" class="dark-btn">Book Now</a>
                     </div>
                 </div>
             @endforeach

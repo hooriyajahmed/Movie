@@ -313,7 +313,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('fetchmovie')}}" class="nav-link">
+                    <a href="{{route('fetchbookings')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>All Booking</p>
                     </a>
