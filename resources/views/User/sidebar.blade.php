@@ -32,13 +32,13 @@
 </head>
 <body>
 <!--preloading-->
-<div id="preloader">
+{{-- <div id="preloader">
     <img class="logo" src="{{asset('User/images/logo1.png')}}" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
     </div>
-</div>
+</div> --}}
 <!--end of preloading-->
 <!--login form popup-->
 <div class="login-wrapper" id="login-content">
@@ -161,17 +161,7 @@
 								<li><a href="moviesingle.html">Movie list</a></li>
 							</ul>
 						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							celebrities <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-								<li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-								<li><a href="celebritylist.html">celebrity list</a></li>
-								<li class="it-last"><a href="celebritysingle.html">celebrity single</a></li>
-							</ul>
-						</li>
+						<li><a href="{{ route('celebrityname') }}">celebrity </a></li>
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							news <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -205,7 +195,7 @@
 								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
 							</ul>
 						</li>                
-						<li><a href="#">Help</a></li>
+						{{-- <li><a href="{{route('booking.form')}}">Booking</a></li> --}}
 						<li class="loginLink"><a href="#">LOG In</a></li>
 						<li class="btn signupLink"><a href="#">sign up</a></li>
 					</ul>

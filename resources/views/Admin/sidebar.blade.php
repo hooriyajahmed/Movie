@@ -321,7 +321,29 @@
                 </ul>
               </li>
 
-
+<li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-film"></i>
+                  <p>
+                  Celebrity
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('celebrity') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Add celebrity</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('fetchcelebrity') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>All celebrities</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
 
 

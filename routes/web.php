@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\celebrityController;
 use App\Http\Controllers\movieController;
 use App\Http\Controllers\trailerController;
 use App\Http\Controllers\userController;
@@ -86,3 +87,19 @@ Route::get('/user>category', [userController::class, 'fatchcategory'])->name('fa
 
 // user movie
 Route::get('/user>movie/{id}', [userController::class, 'moviecategory'])->name('moviecategory');
+
+//admin celebrity
+Route::get('/celebrity', [celebrityController::class, 'celebritypage'])->name('celebrity');
+
+Route::post('/admin/insertcelebrity', [celebrityController::class, 'insertcelebrity'])->name('celebrityinsert')->middleware(validrole::class);
+// Fetch celebrity
+Route::get('/admin/fetchcelebrity', [celebrityController::class, 'fetch'])->name('fetchcelebrity')->middleware(validrole::class);
+// Delete celebrity
+Route::get('/admin/deletecelebrity/{id}', [celebrityController::class, 'delete'])->name('deletecelebrity')->middleware(validrole::class);
+// Edit celebrity form
+Route::get('/admin/editcelebrity/{id}', [celebrityController::class, 'edit'])->name('editcelebrity')->middleware(validrole::class);
+// Update celebrity
+Route::post('/admin/updatecelebrity/{id}', [celebrityController::class, 'update'])->name('updatecelebrity')->middleware(validrole::class);
+
+// user celebrity
+Route::get('/user/celebrity',[userController::class,'celebrityname'])->name('celebrityname');

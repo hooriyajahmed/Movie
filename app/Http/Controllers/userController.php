@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
+use App\Models\Celebrity;
 use App\Models\Movie;
 
 class userController extends Controller
@@ -25,7 +26,11 @@ function moviecategory($id){
     $catmovie= Movie::where('cat_id', $id)->get();;
     return view('User.movie',compact('catmovie'));
 }
-
+public function celebrityname()
+    {
+        $celebrity=Celebrity::all();
+        return view('User.celebrityname',compact('celebrity'));
+    }
 
 
 }
