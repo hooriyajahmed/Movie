@@ -42,7 +42,7 @@
                         </td>
                         <td>
                             @if($user->role == 'user')
-                                <a href="#" class="btn edit">Edit</a>
+                                <a href="{{ route('edituser', $user->id) }}" class="btn edit">Edit</a>
                                 <a href="{{ route('deleteuser',$user->id) }}"
                                    onclick="return confirm('Delete this user?')"
                                    class="btn delete">Delete</a>

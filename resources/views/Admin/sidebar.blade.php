@@ -348,7 +348,12 @@
 
 
 
-
+<li class="nav-item">
+  <a href="{{ route('admin.feedback') }}" class="nav-link">
+    <i class="nav-icon bi bi-chat-dots"></i>
+    <p>Feedback</p>
+  </a>
+</li>
 
 
 

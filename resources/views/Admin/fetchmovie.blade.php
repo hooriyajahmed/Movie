@@ -38,8 +38,10 @@
                         <td>{{ $movie->seats }}</td>
 
                         <td>
-                            <img src="{{asset('storage/movie/'.$movie->picture) }}"
-                                 class="movie-img">
+                            <img src="{{ asset('storage/movie/' . $movie->picture) }}"
+     class="movie-img"
+     alt="please wait">
+
                         </td>
 
                         <td>

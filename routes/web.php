@@ -28,38 +28,42 @@ Route::get('/adminpage', [adminController::class, "adminindex"])->name('adminind
 Route::get('/user>index', [userController::class, 'userindex'])->name('userindex')->middleware(validuser::class);
 //fetchusers
 Route::get('/admin>alluser', [adminController::class, "alluser"])->name('alluser')->middleware(validrole::class);
+// Edit user page
+Route::get('/admin/user/edit/{id}', [adminController::class, 'editUser'])->name('edituser');
+// Update user
+Route::post('/admin/user/update/{id}', [adminController::class, 'updateUser'])->name('updateuser');
 //deleteusers
 Route::get('/delete/{id}', [adminController::class, 'deleteuser'])->name('deleteuser')->middleware(validrole::class);
 //logout
 Route::get('/logout', [authController::class, 'logout'])->name('logout');
 
-Route::get('admin>category', [categoryController::class, "insert"])->name("insertcategory")->middleware(validrole::class);
+Route::get('admin>category', [categoryController::class, "insert"])->name("insertcategory");
 
-Route::post('admin>insert', [categoryController::class, "insertcategory"])->name("insert")->middleware(validrole::class);
+Route::post('admin>insert', [categoryController::class, "insertcategory"])->name("insert");
 //fetch category
-Route::get('/fetchcategory', [categoryController::class, "fetch"])->name("fetchcategory")->middleware(validrole::class);
+Route::get('/fetchcategory', [categoryController::class, "fetch"])->name("fetchcategory");
 //delete category
-Route::get('/deletecategory/{id}', [categoryController::class, 'deletecategory'])->name('deletecategory')->middleware(validrole::class);
+Route::get('/deletecategory/{id}', [categoryController::class, 'deletecategory'])->name('deletecategory');
 // category edit
-Route::get("/editcategory{id}", [categoryController::class, "edit"])->name("editcategory")->middleware(validrole::class);
+Route::get("/editcategory{id}", [categoryController::class, "edit"])->name("editcategory");
 
-Route::post("/updatecategory{id}", [categoryController::class, "update"])->name("updatecategory")->middleware(validrole::class);
+Route::post("/updatecategory{id}", [categoryController::class, "update"])->name("updatecategory");
 // Show insert form
-Route::get('Admin>insertmovie', [movieController::class, 'insert'])->name('insertmovie')->middleware(validrole::class);
+Route::get('Admin>insertmovie', [movieController::class, 'insert'])->name('insertmovie');
 // Handle form submission (POST)
-Route::post('Admin>insertmovie', [movieController::class, 'insertmovie'])->name('movieinsert')->middleware(validrole::class);
+Route::post('Admin>insertmovie', [movieController::class, 'insertmovie'])->name('movieinsert');
 // Fetch movies
-Route::get('Admin>fetchmovie', [movieController::class, 'fetch'])->name('fetchmovie')->middleware(validrole::class);
+Route::get('Admin>fetchmovie', [movieController::class, 'fetch'])->name('fetchmovie');
 // Delete movie
-Route::get('Admin/deletemovie/{id}', [movieController::class, 'delete'])->name('deletemovie')->middleware(validrole::class);
+Route::get('Admin/deletemovie/{id}', [movieController::class, 'delete'])->name('deletemovie');
 // Edit movie form
-Route::get('Admin/editmovie/{id}', [movieController::class, 'edit'])->name('editmovie')->middleware(validrole::class);
+Route::get('Admin/editmovie/{id}', [movieController::class, 'edit'])->name('editmovie');
 // Update movie
-Route::post('Admin/updatemovie/{id}', [movieController::class, 'update'])->name('updatemovie')->middleware(validrole::class);
+Route::post('Admin/updatemovie/{id}', [movieController::class, 'update'])->name('updatemovie');
 
 // booking form open
 Route::get('/booking/{id}', [BookingController::class, 'userbooking'])
-    ->name('booking.form');
+    ->name('bookingform.');
 
 // booking save
 Route::post('/booking', [BookingController::class, 'store'])
@@ -88,6 +92,8 @@ Route::get('/user>category', [userController::class, 'fatchcategory'])->name('fa
 // user movie
 Route::get('/user>movie/{id}', [userController::class, 'moviecategory'])->name('moviecategory');
 
+Route::get('/user>allmovie', [userController::class, 'movieall'])->name('allmovie');
+
 //admin celebrity
 Route::get('/celebrity', [celebrityController::class, 'celebritypage'])->name('celebrity');
 
@@ -103,3 +109,15 @@ Route::post('/admin/updatecelebrity/{id}', [celebrityController::class, 'update'
 
 // user celebrity
 Route::get('/user/celebrity',[userController::class,'celebrityname'])->name('celebrityname');
+// Admin Feedback List
+
+Route::get('/admin/feedback', [adminController::class, 'feedbackList'])
+    ->middleware('auth')
+    ->name('admin.feedback');
+
+// feedback delete
+
+Route::delete('/admin/feedback/{id}', [adminController::class, 'deleteFeedback'])
+    ->name('admin.feedback.delete');
+//user blog
+Route::get('/user/blog',[userController::class,'blogdetail'])->name('blogdetail');

@@ -12,7 +12,8 @@ class userController extends Controller
 {
     function userindex()
     {
-        return view('User.index');
+        $allmovie=Movie::all();
+        return view('User.index',compact('allmovie'));
     }
 
 
@@ -30,6 +31,17 @@ public function celebrityname()
     {
         $celebrity=Celebrity::all();
         return view('User.celebrityname',compact('celebrity'));
+    }
+    public function blogdetail()
+    {
+        return view('User.blogs');
+    }
+
+
+
+    public function movieall(){
+        $allmovie=Movie::all();
+        return view('User.allmovie',compact('allmovie'));
     }
 
 
