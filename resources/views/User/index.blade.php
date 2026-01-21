@@ -1,6 +1,136 @@
 @extends('User.sidebar')
 
 @section('user')
+<style>
+	/* ===== Trailers Section ===== */
+.trailers {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #1c1c2a, #121218);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.trailers .title-hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.trailers .title-hd h2 {
+    font-size: 32px;
+    font-weight: 700;
+    position: relative;
+}
+
+.trailers .title-hd h2::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background: #ff4c60;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.trailers .title-hd .viewall {
+    color: #ff4c60;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.trailers .title-hd .viewall:hover {
+    color: #fff;
+}
+
+.trailers .videos {
+    position: relative;
+}
+
+/* Main video slider */
+.slider-for-2.video-ft {
+    margin-bottom: 25px;
+}
+
+.slider-for-2.video-ft video {
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.slider-for-2.video-ft video:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Thumbnail slider */
+.slider-nav-2.thumb-ft {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.slider-nav-2.thumb-ft::-webkit-scrollbar {
+    height: 6px;
+}
+
+.slider-nav-2.thumb-ft::-webkit-scrollbar-thumb {
+    background: #ff4c60;
+    border-radius: 3px;
+}
+
+.slider-nav-2.thumb-ft::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.slider-nav-2.thumb-ft .item {
+    min-width: 160px;
+    background: #1b1b2f;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.slider-nav-2.thumb-ft .item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.slider-nav-2.thumb-ft .item h4 {
+    font-size: 16px;
+    margin: 8px 0 4px;
+}
+
+.slider-nav-2.thumb-ft .item p {
+    font-size: 13px;
+    color: #ccc;
+    padding: 0 5px 10px;
+}
+
+.slider-nav-2.thumb-ft .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slider-nav-2.thumb-ft .item {
+        min-width: 120px;
+    }
+
+    .slider-for-2.video-ft video {
+        height: auto;
+    }
+}
+
+</style>
     <div class="slider movie-items">
 	<div class="container">
 		<div class="row">
@@ -898,98 +1028,53 @@
 </div>
 
 <div class="trailers">
-	<div class="container">
-		<div class="row ipad-width">
-			<div class="col-md-12">
-				<div class="title-hd">
-					<h2>in theater</h2>
-					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
-				</div>
-				<div class="videos">
-				 	<div class="slider-for-2 video-ft">
-				 		<div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/1Q8fG0TtVAY"></iframe>
-					    </div>
-					    <div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/w0qQkSuWOS8"></iframe>
-					    </div>
-					    <div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/44LdLqgOpjo"></iframe>
-					    </div>
-					    <div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/gbug3zTm3Ws"></iframe>
-					    </div>
-					    <div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/e3Nl_TCQXuw"></iframe>
-					    </div>
-					    <div>
-					    	<iframe class="item-video" src="#" data-src="https://www.youtube.com/embed/NxhEZG0k9_w"></iframe>
-					    </div>
-						
-						
-					</div>
-					<div class="slider-nav-2 thumb-ft">
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer7.jpg')}}"  alt="photo by Barn Images" width="4096" height="2737">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Wonder Woman</h4>
-	                        	<p>2:30</p>
-	                        </div>
-						</div>
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer2.jpg')}}"  alt="photo by Barn Images" width="350" height="200">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Oblivion: Official Teaser Trailer</h4>
-	                        	<p>2:37</p>
-	                        </div>
-						</div>
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer6.jpg')}}" alt="photo by Joshua Earle">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Exclusive Interview:  Skull Island</h4>
-	                        	<p>2:44</p>
-	                        </div>
-						</div>
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer3.png')}}" alt="photo by Alexander Dimitrov" width="100" height="56">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Logan: Director James Mangold Interview</h4>	
-	                        	<p>2:43</p>
-	                        </div>
-						</div>
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer4.png')}}"  alt="photo by Wojciech Szaturski" width="100" height="56">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Beauty and the Beast: Official Teaser Trailer 2</h4>	
-	                        	<p>2: 32</p>
-	                        </div>	
-						</div>
-						<div class="item">
-							<div class="trailer-img">
-								<img src="{{asset('User/images/uploads/trailer5.jpg')}}"  alt="photo by Wojciech Szaturski" width="360" height="189">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Fast&Furious 8</h4>	
-	                        	<p>3:11</p>
-	                        </div>	
-						</div>
-					
-					</div>
-				</div>   
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-12">
+                <div class="title-hd">
+                    <h2>Trailers</h2>
+                    <a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+                </div>
+
+                <div class="videos">
+
+                @if(isset($trailers) && $trailers->count())
+
+                    {{-- MAIN VIDEO SLIDER --}}
+                    <div class="slider-for-2 video-ft">
+                        @foreach($trailers as $trailer)
+                            <div>
+                                <video controls width="100%">
+                                    <source src="{{ asset('uploads/trailers/'.$trailer->video) }}" type="video/mp4">
+                                </video>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- THUMBNAIL SLIDER --}}
+                    <div class="slider-nav-2 thumb-ft">
+                        @foreach($trailers as $trailer)
+                            <div class="item">
+                                <img 
+                                    src="{{ asset('storage/movie/'.($trailer->movie->picture )) }}" 
+                                    alt=""
+                                >
+                                <h4>{{ $trailer->movie->name ?? 'Movie not found' }}</h4>
+                                <p>{{ $trailer->desc }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+
+                @else
+                    <p style="color:#fff;">No trailers available</p>
+                @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <!-- latest new v1 section-->
 <div class="latestnew">
 	<div class="container">

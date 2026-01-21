@@ -168,9 +168,9 @@
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">
 						<li class="dropdown first">
-							<a href="{{ route('booking.form') }}">
+							{{-- <a href="{{ route('booking.form') }}">
 							Booking 
-							</a>
+							</a> --}}
 						</li>                
 						<li><a href="#">Feedback</a></li>
 						<li class="loginLink"><a href="#">LOG In</a></li>

@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\Celebrity;
 use App\Models\Movie;
+use App\Models\Trailer;
 
 class userController extends Controller
 {
     function userindex()
-    {
-        $allmovie=Movie::all();
-        return view('User.index',compact('allmovie'));
-    }
+{
+    $allmovie = Movie::all();
+    $trailers = Trailer::with('movie')->latest()->get();
 
-
+    return view('User.index', compact('allmovie', 'trailers'));
+}
     function fatchcategory(){
     $cat=category::all();
 return view('User.category',compact('cat'));
