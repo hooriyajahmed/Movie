@@ -63,6 +63,11 @@
 <div class="movie-items">
     <div class="container">
         <h1 class="page-title mt-5">All Movies</h1>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
         <div class="row justify-content-center mt-4 gy-5">
             @foreach ($allmovie as $movie)
@@ -77,6 +82,7 @@
 
                         <p class="price">💰 Price: {{ $movie->amount }}</p>
                         <p class="seats">🎟 Seats: {{ $movie->seats }}</p>
+                        <a href="{{route('booking.form',$movie->id)}}" class="dark-btn">Book Now</a>
 
                     </div>
                 </div>

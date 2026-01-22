@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Movie;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -31,7 +30,6 @@ class BookingController extends Controller
 
         // Movie seats update
         $movie = Movie::findOrFail($req->movie_id);
-
         if($movie->seats < $req->seats){
             return back()->with('error', 'Not enough seats available');
         }
@@ -39,32 +37,22 @@ class BookingController extends Controller
         $movie->seats -= $req->seats;
         $movie->save();
 
-        // Booking create and store in variable
+        $userid=Auth::user()->id;
+
+        // // Booking create and store in variable
         $booking = Booking::create([
-            'user_id'      => Auth::user()->id,
+            'user_id'      => $userid,
             'movie_id'     => $req->movie_id,
             'show_time'    => $req->show_time,
             'seat_class'   => $req->seat_class,
             'seats'        => $req->seats,
             'booking_date' => $req->booking_date,
         ]);
+        if($booking){
+            return redirect()->route('newmovies')->with('success',"Movie Book Successfully");
+        }
 
-        // PDF generate using the $booking variable
-        $pdf = Pdf::loadView('pdf.bookingpdf', compact('booking'));
-
-        // Download the PDF
-        return $pdf->download('booking-slip.pdf');
     }
-
-
-
-function bookingform(){
-
-return view('Admin.booking');
-}
-
-
-
 
     // Optional: fetch bookings
     public function fetchbooking()

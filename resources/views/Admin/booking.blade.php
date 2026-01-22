@@ -124,7 +124,7 @@
 
             <div class="col">
                 <label>Date</label>
-                <input type="date" name="booking_date" required>
+                <input type="date" name="booking_date"required min="{{ date('Y-m-d') }}">
             </div>
         </div>
 
