@@ -93,67 +93,15 @@
     <!-- Left Links: Home, Contact -->
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <a class="nav-link fw-medium text-primary" href="#">Home</a>
+        <a class="nav-link fw-medium text-primary" href="{{route('adminindex')}}">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link fw-medium text-primary" href="#">Contact</a>
+       <li class="nav-item">
+        <a class="nav-link fw-medium text-primary" href="{{route('userindex')}}">Go To Website</a>
       </li>
     </ul>
 
     <!-- Right Navbar Items -->
     <ul class="navbar-nav ms-auto align-items-center">
-
-      <!-- Go To Website Button -->
-      <li class="nav-item me-3">
-        <a href="{{ route('userindex') }}" class="btn btn-sm btn-primary text-white fw-bold">
-          Go to Website
-        </a>
-      </li>
-
-      <!-- Search Icon -->
-      <li class="nav-item me-2">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="bi bi-search fs-5"></i>
-        </a>
-      </li>
-
-      <!-- Messages Dropdown -->
-      <li class="nav-item dropdown me-2">
-        <a class="nav-link" data-bs-toggle="dropdown" href="#">
-          <i class="bi bi-chat-text fs-5"></i>
-          <span class="badge bg-danger rounded-pill">3</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-              <img src="{{asset('Admin/assets/img/user1-128x128.jpg')}}" class="rounded-circle me-3" width="40" alt="User">
-              <div>
-                <div class="fw-bold">Brad Diesel <small class="text-danger"><i class="bi bi-star-fill"></i></small></div>
-                <div class="small text-muted">Call me whenever you can... • 4 Hours Ago</div>
-              </div>
-            </a>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-center text-primary" href="#">See All Messages</a></li>
-        </ul>
-      </li>
-
-      <!-- Notifications Dropdown -->
-      <li class="nav-item dropdown me-2">
-        <a class="nav-link" data-bs-toggle="dropdown" href="#">
-          <i class="bi bi-bell-fill fs-5"></i>
-          <span class="badge bg-warning rounded-pill">15</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li class="dropdown-header">15 Notifications</li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>4 new messages <span class="text-muted small float-end">3 mins</span></a></li>
-          <li><a class="dropdown-item" href="#"><i class="bi bi-people-fill me-2"></i>8 friend requests <span class="text-muted small float-end">12 hrs</span></a></li>
-          <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-fill me-2"></i>3 new reports <span class="text-muted small float-end">2 days</span></a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-center text-primary" href="#">See All Notifications</a></li>
-        </ul>
-      </li>
 
       <!-- User Menu -->
       <li class="nav-item dropdown user-menu">
@@ -164,13 +112,12 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li class="dropdown-header text-center">
             <img src="{{asset('Admin/assets/img/user2-160x160.jpg')}}" class="rounded-circle mb-2" width="70" alt="User">
-            <p class="mb-0 fw-bold">Alexander Pierce</p>
+            <p class="mb-0 fw-bold" >Alexander Pierce</p>
             <small class="text-muted">Member since Nov. 2023</small>
           </li>
           <li><hr class="dropdown-divider"></li>
           <li class="dropdown-item d-flex justify-content-between">
-            <a href="#">Profile</a>
-            <a href="#" class="text-danger">Sign Out</a>
+            <a href="{{route('user.profile')}}">Profile</a>
           </li>
         </ul>
       </li>

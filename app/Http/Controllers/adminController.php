@@ -72,4 +72,28 @@ public function deleteFeedback($id)
     return redirect()->back()->with('success', 'Feedback deleted successfully');
 }
    
+public function feedbackForm()
+{
+    return view('user.formfeedback');
+
+
+}
+
+public function storeFeedback(Request $request)
+{
+    $request->validate([
+        'message' => 'required',
+        'rating'  => 'required',
+    ]);
+
+    Feedback::create([
+        'user_id' => auth()->id(),
+        'name'    => $request->name,
+        'email'   => $request->email,
+        'rating'  => $request->rating,
+        'message' => $request->message,
+    ]);
+
+    return redirect()->back()->with('success', 'Feedback submitted successfully');
+}
 }

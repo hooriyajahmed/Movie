@@ -8,6 +8,7 @@ use App\Models\category;
 use App\Models\Celebrity;
 use App\Models\Movie;
 use App\Models\Trailer;
+use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
 {
@@ -45,5 +46,38 @@ public function celebrityname()
         return view('User.allmovie',compact('allmovie'));
     }
 
+public function profile()
+    {
+        $user = Auth::user(); 
+        return view('user.profile', compact('user'));
+    }
 
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('user.profile', compact('user'));
+    }
+
+    /* Update profile logic */
+    public function profileUpdate(Request $req)
+    {
+        $user = Auth::user();
+
+        $req->validate([
+            'name'  => 'required',
+            'email' => 'required',
+            'passsword' => 'required',
+            
+        ]);
+
+       
+        /* Data update */
+        $user->name  = $req->name;
+        $user->email = $req->email;
+        $user->password = $req->password;
+        $user->save();
+
+        return redirect()->route('user.profile')
+        ->with('success', 'Profile updated successfully');
+    }
 }

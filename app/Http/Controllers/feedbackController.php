@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Feedback;
 
+
 class FeedbackController extends Controller
 {
     public function create()
@@ -12,16 +13,17 @@ class FeedbackController extends Controller
         return view('user.formfeedback');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'message' => 'required',
-        ]);
+  
+    
 
-        Feedback::create($request->all());
+public function storeFeedback(Request $request)
+{
+    Feedback::create([
+        'user_id' => auth()->id(),
+        'message' => $request->message,
+    ]);
 
-        return back()->with('success', 'Feedback submitted successfully');
-    }
+    return redirect()->back()->with('success', 'Feedback sent successfully');
+}
+
 }

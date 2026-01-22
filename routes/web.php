@@ -62,8 +62,11 @@ Route::get('Admin/editmovie/{id}', [movieController::class, 'edit'])->name('edit
 Route::post('Admin/updatemovie/{id}', [movieController::class, 'update'])->name('updatemovie');
 
 // booking form open
+
 Route::get('/booking/{id}', [BookingController::class, 'userbooking'])
-    ->name('bookingform.');
+    ->name('booking.form');
+Route::get('/booking', [BookingController::class, 'bookingform'])
+    ->name('bookingform');
 
 // booking save
 Route::post('/booking', [BookingController::class, 'store'])
@@ -115,9 +118,34 @@ Route::get('/admin/feedback', [adminController::class, 'feedbackList'])
     ->middleware('auth')
     ->name('admin.feedback');
 
+    // feedback form open karne ka route
+Route::get('/feedback', [adminController::class, 'feedbackForm'])
+->middleware('auth')
+->name('user.formfeedback');
+
+Route::post('/feedback', [adminController::class, 'storeFeedback'])
+    ->middleware('auth')
+    ->name('feedback.store');
+
+
+Route::post('/feedback', [adminController::class, 'storeFeedback'])
+    ->middleware('auth')
+    ->name('feedback.store');
+
+
+
 // feedback delete
 
 Route::delete('/admin/feedback/{id}', [adminController::class, 'deleteFeedback'])
     ->name('admin.feedback.delete');
 //user blog
 Route::get('/user/blog',[userController::class,'blogdetail'])->name('blogdetail');
+// user profile
+ Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
+
+//  movie list
+ Route::get('/movies', [movieController::class, 'allMovies'])
+     ->name('newmovies')->middleware('auth');
+
+     //user logout
+     

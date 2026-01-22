@@ -153,28 +153,21 @@
 							</a>
 							<ul class="dropdown-menu level1">			
 								<li><a href="{{ route('fatchcategory') }}">Categories</a></li>
-								<li><a href="moviesingle.html">Movie list</a></li>
+								<li><a href="{{ route('newmovies') }}">Movie list</a></li>
 								
 							</ul>
 						</li>
-					
-						
-								<li><a href="{{ route('celebrityname') }}">celebrity </a></li>
+							<li><a href="{{ route('celebrityname') }}">celebrity </a></li>
 							<li class="dropdown first">
 							<a href="{{ route('blogdetail') }}">
 							Blogs
 							</a>
 						</li> 
+						<li><a href="{{ route('user.profile') }}">profile</a></li>
 					</ul>
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li class="dropdown first">
-							{{-- <a href="{{ route('booking.form') }}">
-							Booking 
-							</a> --}}
-						</li>                
-						<li><a href="#">Feedback</a></li>
-						<li class="loginLink"><a href="#">LOG In</a></li>
-						<li class="btn signupLink"><a href="#">sign up</a></li>
+					<ul class="nav navbar-nav flex-child-menu menu-right">               
+						<li class="dropdown first"><a href="{{ route('user.formfeedback') }}">Feedback</a></li>
+						<li class="btn "><a href="{{route('logout')}}">Log out</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->

@@ -97,4 +97,9 @@ class MovieController extends Controller
 
         return redirect()->route('fetchmovie')->with('success', 'Movie Updated');
     }
+    public function allMovies()
+{
+    $allmovie = Movie::all(); // sari movies (har category ki)
+    return view('User.newmovie', compact('allmovie'));
+}
 }
